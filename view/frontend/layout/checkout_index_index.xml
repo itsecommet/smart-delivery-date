@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ecommet_SmartDeliveryDate::css/style.css"/>
+    </head>
+
+    <body>
+        <referenceContainer name="content">
+            <block class="Ecommet\SmartDeliveryDate\Block\Product\DeliveryDate" name="checkout.deliverydate" template="Ecommet_SmartDeliveryDate::product/deliverydate.phtml" before="checkout.root"/>
+        </referenceContainer>
+    </body>
+</page>

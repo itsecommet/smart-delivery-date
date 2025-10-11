@@ -1,0 +1,29 @@
+{
+    "name": "ecommet/module-smart-delivery-date",
+    "description": "Simple Delivery Date extension for Magento 2",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "proprietary"
+    ],
+    "authors": [
+        {
+            "name": "Ecommet Solutions",
+            "email": "ecommet.solution@gmail.com",
+            "homepage": "https://ecommet.in",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ecommet\\SmartDeliveryDate\\": ""
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "magento/framework": "103.*"
+    }
+}

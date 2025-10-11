@@ -1,0 +1,30 @@
+<?php
+
+/** @var \Ecommet\SmartDeliveryDate\Block\Product\DeliveryDate $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+if (!$block->isEnableDeliveryDate()) {
+    return;
+}
+
+?>
+
+<div class="delivery-date-container" data-bind="scope: 'smartDeliveryDateComponent'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "smartDeliveryDateComponent": {
+                        "component": "Ecommet_SmartDeliveryDate/js/delivery-date-info",
+                        "isOpenDeliveryDate": <?= $escaper->escapeJs(json_encode($block->isOpenDeliveryDate())) ?>,
+                        "showTimeLimit": <?= $escaper->escapeJs(json_encode($block->showTimeLimit())) ?>,
+                        "ajaxUrl": "<?= $escaper->escapeUrl($block->getUrl('smartdelivery/delivery/ajax')) ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>

@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="ecommet" translate="label" sortOrder="500">
+            <label>Ecommet Extensions</label>
+        </tab>
+        <section id="smartdeliverydate" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+            <class>separator-top</class>
+            <label>Smart Delivery Date</label>
+            <tab>ecommet</tab>
+            <resource>Ecommet_SmartDeliveryDate::smartdeliverydate</resource>
+
+            <group id="general" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                <label>General Configurations</label>
+                <field id="enabled" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+            </group>
+
+            <group id="order_processing" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                <label>Order Processing Configurations</label>
+                <depends>
+                    <field id="smartdeliverydate/general/enabled">1</field>
+                </depends>
+                <field id="working_days" translate="label" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Working Days</label>
+                    <source_model>Magento\Config\Model\Config\Source\Locale\Weekdays</source_model>
+                    <validate>required-entry</validate>
+                </field>
+
+                <field id="days_needed_for_processing_the_order" type="text" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Days Needed For Order Processing</label>
+                    <validate>required-entry validate-not-negative-number</validate>
+                    <comment>Number of days needed for preparing the order before sending it. 0 means that the order is ready to be sent as soon as is placed</comment>
+                </field>
+
+                <field id="process_order_today_time_limit" type="time" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Time Limit For Order Processing</label>
+                </field>
+
+                <field id="excluded_processing_dates" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Excluded Dates For Order Processing</label>
+                    <comment>Special days on which no orders are processed: Holidays/Exclude Days/Blackout Days</comment>
+                    <backend_model>Ecommet\SmartDeliveryDate\Block\Adminhtml\Config\Backend\ArraySerializedHolidays</backend_model>
+                    <frontend_model>Ecommet\SmartDeliveryDate\Block\Adminhtml\DynamicFieldHolidays</frontend_model>
+                </field>
+            </group>
+
+            <group id="delivery_settings" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                <label>Delivery Configurations</label>
+                <depends>
+                    <field id="smartdeliverydate/general/enabled">1</field>
+                </depends>
+                <field id="delivery_work_days" translate="label" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Delivery Carrier Working Days</label>
+                    <source_model>Magento\Config\Model\Config\Source\Locale\Weekdays</source_model>
+                    <validate>required-entry</validate>
+                </field>
+
+                <field id="days_needed_for_delivery" type="text" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Days Needed For Delivery</label>
+                    <comment>Number of days needed by the carrier to deliver the order</comment>
+                    <validate>required-entry validate-not-negative-number</validate>
+                </field>
+
+                <field id="enable_open_delivery_date" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Open Delivery Date</label>
+                    <comment>Enables/disables the open delivery date: a range of dates between which delivery will
+                        take place is displayed instead of displaying just a specific delivery date
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <validate>required-entry</validate>
+                </field>
+
+                <field id="open_delivery_range_days" type="text" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Delivery Days Range</label>
+                    <validate>required-entry validate-greater-than-zero validate-integer</validate>
+                    <comment>Range of days within which the order can be delivered</comment>
+                    <depends>
+                        <field id="smartdeliverydate/delivery_settings/enable_open_delivery_date">1</field>
+                    </depends>
+                </field>
+
+                <field id="use_excluded_processing_dates_as_excluded_delivery_dates" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Use Excluded Processing Dates As Excluded Delivery Dates</label>
+                    <comment>Allows to use dates excluded from order processing as dates on which orders are not delivered
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>required-entry</validate>
+                </field>
+
+                <field id="excluded_delivery_dates" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Excluded Dates For Delivery</label>
+                    <comment>Special days on which no orders are delivered: Holidays/Exclude Days/Blackout Days</comment>
+                    <backend_model>Ecommet\SmartDeliveryDate\Block\Adminhtml\Config\Backend\ArraySerializedHolidays</backend_model>
+                    <frontend_model>Ecommet\SmartDeliveryDate\Block\Adminhtml\DynamicFieldHolidays</frontend_model>
+                    <depends>
+                        <field id="smartdeliverydate/delivery_settings/use_excluded_processing_dates_as_excluded_delivery_dates">0</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="frontend" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                <label>Frontend Settings</label>
+                <depends>
+                    <field id="smartdeliverydate/general/enabled">1</field>
+                </depends>
+
+                <field id="show_time_limit" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Show Time Limit</label>
+                    <comment>Display the time limit value in the shipping information</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <validate>required-entry</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

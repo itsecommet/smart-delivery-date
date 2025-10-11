@@ -1,0 +1,20 @@
+.container-info-box.delivery-date {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    display: inline-block;
+}
+
+.container-info-box.delivery-date span {
+    display: inline-block;
+    color: #444;
+}
+
+.container-info-box.delivery-date .deliverydate {
+    font-weight: 600;
+    color: #222;
+}
