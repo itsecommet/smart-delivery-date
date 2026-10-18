@@ -14,7 +14,7 @@ that you can actually deliver on.
 * **Per-product processing time** attribute; in the cart the slowest product decides.
 * Chosen date on the **admin order view**, **order grid** (filterable), **customer account**,
   **order e-mails** (`{{var ecommet_delivery_date}}`) and the **REST API**.
-* **Luma and Hyvä** (Alpine.js, CSP compatible) templates in one module.
+* **Luma and Hyvä** (Alpine.js) templates in one module.
 * Translatable, with customisable messages and date format per store view.
 
 ## Requirements
@@ -23,7 +23,7 @@ that you can actually deliver on.
 | --- | --- |
 | Magento Open Source / Adobe Commerce | 2.4.6 – 2.4.9 |
 | PHP | 8.1 – 8.5 |
-| Themes | Luma (and Luma-based), Hyvä 1.3+ with Luma checkout fallback |
+| Themes | Luma (and Luma-based), Hyvä (tested with 1.5.3) with the Luma checkout fallback |
 
 ## Installation
 

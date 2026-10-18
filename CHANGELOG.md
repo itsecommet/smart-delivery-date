@@ -20,7 +20,7 @@ Complete rewrite.
 - Per-product "Processing Time (days)" attribute; in the cart the slowest product decides.
 - Delivery date on the admin order view, the order grid (column and filter), the customer
   account order view, order e-mails (`{{var ecommet_delivery_date}}`) and the order REST API.
-- Hyvä templates (Alpine.js, strict-CSP compatible) and Tailwind registration.
+- Hyvä templates (Alpine.js) and Tailwind registration.
 - Per-store-view messages, date format (ICU, localised) and visibility per page type.
 - Option to hide the estimate for out-of-stock products.
 - Unit tests for the date engine.

@@ -40,6 +40,7 @@ class ExcludedDates extends AbstractFieldArray
         $this->addColumn('content', [
             'label' => __('Description'),
             'class' => 'admin__control-text',
+            'style' => 'min-width: 14em',
         ]);
         $this->addColumn('recurring', [
             'label' => __('Every Year'),

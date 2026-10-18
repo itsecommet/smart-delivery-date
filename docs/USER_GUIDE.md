@@ -1,6 +1,6 @@
 # Smart Delivery Date: User Guide
 
-Version 2.0.0 · Magento Open Source / Adobe Commerce 2.4.6 – 2.4.9 · Luma and Hyvä
+Version 2.0.0 · For Magento Open Source and Adobe Commerce 2.4.6 – 2.4.9 · Luma and Hyvä themes
 
 Smart Delivery Date tells shoppers when their order will arrive and lets them choose a
 delivery date at checkout. It knows your processing days, your carrier's delivery days, your
@@ -39,6 +39,13 @@ you cannot deliver.
 | My Account → My Orders | The chosen delivery date on the order page. |
 
 When the cut-off time passes, the message and the calendar update automatically without reloading the page.
+
+![Product page: estimate with live cut-off countdown](images/product-page-luma.png)
+*Product page: estimate with live cut-off countdown*
+
+![Shopping cart: estimate for the whole cart](images/shopping-cart.png)
+*Shopping cart: estimate for the whole cart*
+
 
 ---
 
@@ -112,6 +119,9 @@ Scope: **G** = default, **W** = website, **S** = store view.
 | Same-day Cut-off Time | G W | 14:00 | Orders placed after this time start processing the next processing day. Drives the countdown. *00:00:00* means "no cut-off" (end of day). |
 | Excluded Processing Dates | G W | – | Holidays and closures. Each row: **Date**, **Description** (for your reference only), **Every Year** (repeat on the same day and month every year). |
 
+![General and Order Processing settings](images/admin-order-processing.png)
+*General and Order Processing settings*
+
 ### Delivery (your carrier)
 
 | Field | Scope | Default | Description |
@@ -122,6 +132,9 @@ Scope: **G** = default, **W** = website, **S** = store view.
 | Delivery Window Length (days) | G W | 2 | Carrier delivery days added to the earliest date to get the latest date. |
 | Carrier Uses the Same Excluded Dates | G W | Yes | *Yes*: your excluded processing dates also block delivery. *No*: use the list below. |
 | Excluded Delivery Dates | G W | – | Days the carrier does not deliver (shown when the previous field is *No*). |
+
+![Delivery settings](images/admin-delivery-settings.png)
+*Delivery settings*
 
 ### Customer Delivery Date Selection
 
@@ -145,6 +158,9 @@ Scope: **G** = default, **W** = website, **S** = store view.
 | Date Format | G W S | `EEEE, MMMM d` | ICU pattern, localised to the store locale. `EEE d MMM` → "Fri 23 Oct"; `dd/MM/yyyy` → "23/10/2026". |
 | Message With Countdown | G W S | – | Empty = "Order within {countdown} and get it {delivery}". |
 | Message Without Countdown | G W S | – | Empty = "Order now and get it {delivery}". |
+
+![Customer Delivery Date Selection and Storefront Display settings](images/admin-customer-selection-display.png)
+*Customer Delivery Date Selection and Storefront Display settings*
 
 ---
 
@@ -179,6 +195,15 @@ On the shipping step of the one-page checkout the customer sees a calendar:
 * the last selectable day is the earliest date + **Selectable Period**;
 * carrier days off, **excluded delivery dates** and recurring holidays are **greyed out and cannot be clicked**.
 
+![Checkout: only deliverable days can be picked](images/checkout-calendar.png)
+*Checkout: only deliverable days can be picked*
+
+![Checkout: a required date must be chosen before continuing](images/checkout-date-required.png)
+*Checkout: a required date must be chosen before continuing*
+
+![Checkout: date chosen](images/checkout-date-selected.png)
+*Checkout: date chosen*
+
 ### The date is enforced on the server
 
 The calendar is only a convenience. The date is checked again on the server:
@@ -211,6 +236,15 @@ Multi-address checkout ("Check Out with Multiple Addresses" in the cart) is full
 * **Review step:** a **Delivery Dates** box listing the date chosen for each address.
 * Each resulting order stores the date chosen for its address.
 
+![Multi-address checkout: estimate on the address step](images/multi-address-step.png)
+*Multi-address checkout: estimate on the address step*
+
+![Multi-address checkout: estimate and delivery date for each address](images/multi-address-shipping-dates.png)
+*Multi-address checkout: estimate and delivery date for each address*
+
+![Multi-address checkout: chosen dates on the review step](images/multi-address-review.png)
+*Multi-address checkout: chosen dates on the review step*
+
 The same server checks apply. An excluded or expired date sends the customer back to the
 shipping method step with a message, and no order is placed.
 
@@ -223,6 +257,9 @@ Products that take longer to prepare (made-to-order, engraving, …) can have th
 1. **Catalog → Products → edit a product**.
 2. Open the **Smart Delivery Date** group.
 3. Set **Processing Time (days)**, e.g. *5*. Leave it empty to use the configuration value.
+
+![Product edit page: Processing Time (days)](images/admin-product-processing-time.png)
+*Product edit page: Processing Time (days)*
 
 In the cart and at checkout the **slowest product decides** the estimate. For configurable
 products the value of the selected child product is used if set, otherwise the parent's.
@@ -238,6 +275,12 @@ products the value of the selected child product is used if set, otherwise the p
 | Customer account | **My Account → My Orders → View Order**. |
 | Order confirmation e-mail | Add the variable to your template (below). |
 | REST API | `GET /V1/orders/:id` → `extension_attributes.ecommet_delivery_date`. |
+
+![Admin order view: Delivery Date section](images/admin-order-view.png)
+*Admin order view: Delivery Date section*
+
+![Admin order grid: Delivery Date column](images/admin-order-grid.png)
+*Admin order grid: Delivery Date column*
 
 ### Adding the date to the order e-mail
 
@@ -258,7 +301,7 @@ products the value of the selected child product is used if set, otherwise the p
 
 Hyvä templates are included; no compatibility module is needed.
 
-* **Product page and cart:** Alpine.js components. They work with Hyvä's strict Content Security Policy mode.
+* **Product page and cart:** Alpine.js components, written in the CSP-friendly style Hyvä recommends (registered with `Alpine.data`, inline script registered with Hyvä's CSP helper). Tested with Hyvä 1.5.3.
 * **Tailwind:** the module registers its templates with the Hyvä build automatically. Rebuild your theme CSS once after installing:
 
   ```bash
@@ -273,6 +316,9 @@ Hyvä templates are included; no compatibility module is needed.
   also has to fall back to Luma. In **Stores → Configuration → Hyvä Themes → Theme Fallback →
   List of path parts**, add a row `multishipping/checkout`. The delivery date fields then work
   as described in [section 7](#7-multi-address-checkout).
+
+![Hyvä theme: product page estimate](images/product-page-hyva.png)
+*Hyvä theme: product page estimate*
 
 ---
 
