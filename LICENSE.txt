@@ -1,0 +1,16 @@
+Copyright (c) Ecommet Solutions (https://ecommet.in). All rights reserved.
+
+Ecommet Smart Delivery Date for Magento 2 is proprietary software.
+
+Your right to install and use this software is granted by the license you received when you
+obtained it: the Adobe Commerce Marketplace End User License Agreement if you obtained it from
+the Adobe Commerce Marketplace, or the Ecommet license at https://ecommet.in/license if you
+obtained it from Ecommet directly.
+
+Except as allowed by that license, you may not copy, modify, distribute, sublicense or sell
+this software or any part of it.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.

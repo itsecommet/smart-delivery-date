@@ -1,0 +1,25 @@
+{
+    "quote": {
+        "column": {
+            "ecommet_delivery_date": true
+        }
+    },
+    "quote_address": {
+        "column": {
+            "ecommet_delivery_date": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "ecommet_delivery_date": true
+        }
+    },
+    "sales_order_grid": {
+        "column": {
+            "ecommet_delivery_date": true
+        },
+        "index": {
+            "SALES_ORDER_GRID_ECOMMET_DELIVERY_DATE": true
+        }
+    }
+}

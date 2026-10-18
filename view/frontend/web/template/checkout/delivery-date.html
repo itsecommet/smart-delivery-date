@@ -1,0 +1,70 @@
+<!--
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<!-- ko if: isVisible -->
+<div class="ecommet-delivery-date">
+  <!-- ko if: segments().length -->
+  <div class="ecommet-delivery-estimate">
+    <span class="ecommet-delivery-estimate__icon" aria-hidden="true"></span>
+    <span class="ecommet-delivery-estimate__text">
+      <!-- ko foreach: segments --><!-- ko if: strong --><strong
+        data-bind="text: text"
+      ></strong
+      ><!-- /ko --><!-- ko ifnot: strong --><!-- ko text: text --><!-- /ko --><!-- /ko --><!-- /ko -->
+    </span>
+  </div>
+  <!-- /ko -->
+
+  <!-- ko if: model.isEnabled -->
+  <div
+    class="field ecommet-delivery-date__field"
+    data-bind="css: {_required: model.isRequired, _error: model.error}"
+  >
+    <label class="label" data-bind="attr: {for: inputId}">
+      <span data-bind="text: selection.label"></span>
+    </label>
+    <div class="control">
+      <input
+        type="text"
+        class="input-text ecommet-delivery-date__input"
+        readonly="readonly"
+        autocomplete="off"
+        data-bind="
+            attr: {
+                id: inputId,
+                'aria-required': model.isRequired ? 'true' : 'false',
+                'aria-invalid': model.error() ? 'true' : 'false',
+                'aria-describedby': errorId
+            },
+            afterRender: initCalendar"
+      />
+      <!-- ko if: !model.isRequired && model.selectedDate() -->
+      <button
+        type="button"
+        class="action action-clear ecommet-delivery-date__clear"
+        data-bind="click: clear"
+      >
+        <span data-bind="i18n: 'Clear'"></span>
+      </button>
+      <!-- /ko -->
+      <div
+        class="field-error"
+        role="alert"
+        data-bind="attr: {id: errorId}, visible: model.error"
+      >
+        <span data-bind="text: model.error"></span>
+      </div>
+      <!-- ko if: selection.note -->
+      <div
+        class="ecommet-delivery-date__note"
+        data-bind="text: selection.note"
+      ></div>
+      <!-- /ko -->
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+<!-- /ko -->

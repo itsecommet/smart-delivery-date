@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/**
+ * Customer account order view: chosen delivery date (Luma and Hyvä)
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var \Ecommet\SmartDeliveryDate\ViewModel\OrderDeliveryDate $viewModel */
+$viewModel = $block->getData('view_model');
+$date = $viewModel->getFormattedDate();
+if ($date === '') {
+    return;
+}
+?>
+<div class="ecommet-delivery-date-summary block my-4">
+    <strong><?= $escaper->escapeHtml(__('Delivery Date')) ?>:</strong>
+    <?= $escaper->escapeHtml($date) ?>
+</div>

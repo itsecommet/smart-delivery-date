@@ -1,59 +1,84 @@
 Date,Date
-Info,Info
+Description,Description
+"Every Year","Every Year"
 "Add Date","Add Date"
-Sunday,Sunday
-Monday,Monday
-Tuesday,Tuesday
-Wednesday,Wednesday
-Thursday,Thursday
-Friday,Friday
-Saturday,Saturday
-January,January
-February,February
-March,March
-April,April
-May,May
-June,June
-July,July
-August,August
-September,September
-October,October
-November,November
-December,December
-Jan,Jan
-Feb,Feb
-Mar,Mar
-Apr,Apr
-Jun,Jun
-Jul,Jul
-Aug,Aug
-Sep,Sep
-Oct,Oct
-Nov,Nov
-Dec,Dec
-Sun,Sun
-Mon,Mon
-Tue,Tue
-Wed,Wed
-Thu,Thu
-Fri,Fri
-Dat,Dat
-Su,Su
-Mo,Mo
-Tu,Tu
-We,We
-Th,Th
-Fr,Fr
-Sa,Sa
-"Buy before %1 and receive your order","Buy before %1 and receive your order"
-"Buy now and receive your order","Buy now and receive your order"
-" between "," between "
-of,of
-" and "," and "
-Pablobae,Pablobae
-"Simple Delivery Date","Simple Delivery Date"
-"General Settings","General Settings"
-Status,Status
-"Time limit to process order same day","Time limit to process order same day"
-"Show Time limit","Show Time limit"
-"Holidays/Exclude Days/Blackout Days","Holidays/Exclude Days/Blackout Days"
+No,No
+Yes,Yes
+"No working day is configured within the next ten years.","No working day is configured within the next ten years."
+"Preferred Delivery Date","Preferred Delivery Date"
+"""%1"" is not a valid date. Use the date picker or the YYYY-MM-DD format.","""%1"" is not a valid date. Use the date picker or the YYYY-MM-DD format."
+"Please choose a delivery date.","Please choose a delivery date."
+"The delivery date ""%1"" is not a valid date.","The delivery date ""%1"" is not a valid date."
+"We cannot deliver on %1. Please choose another delivery date (earliest: %2).","We cannot deliver on %1. Please choose another delivery date (earliest: %2)."
+"Order within {countdown} and get it {delivery}","Order within {countdown} and get it {delivery}"
+"Order now and get it {delivery}","Order now and get it {delivery}"
+"on {date}","on {date}"
+"between {from} and {to}","between {from} and {to}"
+%1d,%1d
+%1h,%1h
+%1m,%1m
+%1s,%1s
+"Delivery Date","Delivery Date"
+"Customer selected delivery date:","Customer selected delivery date:"
+"Estimated delivery between <strong>%1</strong> and <strong>%2</strong>","Estimated delivery between <strong>%1</strong> and <strong>%2</strong>"
+"Estimated delivery on <strong>%1</strong>","Estimated delivery on <strong>%1</strong>"
+"Please choose a date","Please choose a date"
+"As soon as possible","As soon as possible"
+"Delivery Dates","Delivery Dates"
+Clear,Clear
+"This delivery date is no longer available. Please choose another date.","This delivery date is no longer available. Please choose another date."
+"Ecommet Smart Delivery Date","Ecommet Smart Delivery Date"
+"Ecommet Extensions","Ecommet Extensions"
+"Smart Delivery Date","Smart Delivery Date"
+General,General
+"Enable Smart Delivery Date","Enable Smart Delivery Date"
+"Master switch. When disabled, nothing is shown on the storefront and no delivery date is checked at checkout.","Master switch. When disabled, nothing is shown on the storefront and no delivery date is checked at checkout."
+"Order Processing (your warehouse)","Order Processing (your warehouse)"
+"When your team prepares orders. The estimate starts from the first processing day an order can be picked up.","When your team prepares orders. The estimate starts from the first processing day an order can be picked up."
+"Processing Days","Processing Days"
+"Weekdays on which orders are processed.","Weekdays on which orders are processed."
+"Processing Time (days)","Processing Time (days)"
+"Processing days needed before an order is handed to the carrier. 0 = ships on the day it is processed. Can be overridden per product with the <b>Processing Time (days)</b> attribute.","Processing days needed before an order is handed to the carrier. 0 = ships on the day it is processed. Can be overridden per product with the <b>Processing Time (days)</b> attribute."
+"Same-day Cut-off Time","Same-day Cut-off Time"
+"Orders placed after this time (store timezone) are processed from the next processing day. Also drives the ""Order within …"" countdown.","Orders placed after this time (store timezone) are processed from the next processing day. Also drives the ""Order within …"" countdown."
+"Excluded Processing Dates","Excluded Processing Dates"
+"Holidays and closures when no orders are processed. ""Every year"" repeats the day and month annually.","Holidays and closures when no orders are processed. ""Every year"" repeats the day and month annually."
+"Delivery (your carrier)","Delivery (your carrier)"
+"When the carrier picks up and delivers. Excluded delivery dates can never be chosen by the customer at checkout.","When the carrier picks up and delivers. Excluded delivery dates can never be chosen by the customer at checkout."
+"Carrier Delivery Days","Carrier Delivery Days"
+"Weekdays on which the carrier collects and delivers.","Weekdays on which the carrier collects and delivers."
+"Transit Time (days)","Transit Time (days)"
+"Carrier delivery days between hand-over and delivery. 0 = delivered on the shipping day.","Carrier delivery days between hand-over and delivery. 0 = delivered on the shipping day."
+"Show a Delivery Window","Show a Delivery Window"
+"Show ""between Monday and Wednesday"" instead of a single date.","Show ""between Monday and Wednesday"" instead of a single date."
+"Delivery Window Length (days)","Delivery Window Length (days)"
+"Carrier delivery days added to the earliest date to get the latest date.","Carrier delivery days added to the earliest date to get the latest date."
+"Carrier Uses the Same Excluded Dates","Carrier Uses the Same Excluded Dates"
+"Yes = the excluded processing dates also block delivery. No = enter separate carrier dates below.","Yes = the excluded processing dates also block delivery. No = enter separate carrier dates below."
+"Excluded Delivery Dates","Excluded Delivery Dates"
+"Days when the carrier does not deliver.","Days when the carrier does not deliver."
+"Customer Delivery Date Selection","Customer Delivery Date Selection"
+"Lets customers choose a delivery date at checkout (one-page and multi-address). Only carrier delivery days from the earliest possible date are offered; excluded dates are blocked in the calendar and re-checked on the server when the order is placed.","Lets customers choose a delivery date at checkout (one-page and multi-address). Only carrier delivery days from the earliest possible date are offered; excluded dates are blocked in the calendar and re-checked on the server when the order is placed."
+"Allow Customers to Choose a Delivery Date","Allow Customers to Choose a Delivery Date"
+"Delivery Date Is Required","Delivery Date Is Required"
+"No = the field is optional and the order ships as soon as possible.","No = the field is optional and the order ships as soon as possible."
+"Selectable Period (days)","Selectable Period (days)"
+"How many calendar days after the earliest delivery date can be chosen.","How many calendar days after the earliest delivery date can be chosen."
+"Field Label","Field Label"
+"Leave empty for ""Preferred Delivery Date"" (translatable).","Leave empty for ""Preferred Delivery Date"" (translatable)."
+"Note Below the Field","Note Below the Field"
+"Optional plain text shown under the date field.","Optional plain text shown under the date field."
+"Storefront Display","Storefront Display"
+"Show Estimate on Product Page","Show Estimate on Product Page"
+"Show Estimate in Shopping Cart","Show Estimate in Shopping Cart"
+"Show Estimate at Checkout","Show Estimate at Checkout"
+"One-page checkout (shipping step) and every step of multi-address checkout.","One-page checkout (shipping step) and every step of multi-address checkout."
+"Hide Estimate for Out-of-Stock Products","Hide Estimate for Out-of-Stock Products"
+"Show Cut-off Countdown","Show Cut-off Countdown"
+"Order within 2h 15m and get it on …","Order within 2h 15m and get it on …"
+"Date Format","Date Format"
+"ICU pattern, localised to the store locale. Examples: <code>EEEE, MMMM d</code> (Friday, October 23), <code>EEE d MMM</code> (Fri 23 Oct), <code>dd/MM/yyyy</code>.","ICU pattern, localised to the store locale. Examples: <code>EEEE, MMMM d</code> (Friday, October 23), <code>EEE d MMM</code> (Fri 23 Oct), <code>dd/MM/yyyy</code>."
+"Message With Countdown","Message With Countdown"
+"Leave empty for the default. Placeholders: <code>{countdown}</code>, <code>{delivery}</code>. Default: ""Order within {countdown} and get it {delivery}"".","Leave empty for the default. Placeholders: <code>{countdown}</code>, <code>{delivery}</code>. Default: ""Order within {countdown} and get it {delivery}""."
+"Message Without Countdown","Message Without Countdown"
+"Leave empty for the default. Placeholder: <code>{delivery}</code>. Default: ""Order now and get it {delivery}"".","Leave empty for the default. Placeholder: <code>{delivery}</code>. Default: ""Order now and get it {delivery}""."
