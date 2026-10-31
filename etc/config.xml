@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <smartdeliverydate>
+            <general>
+                <enabled>0</enabled>
+            </general>
+            <order_processing>
+                <working_days>1,2,3,4,5</working_days>
+                <days_needed_for_processing_the_order>1</days_needed_for_processing_the_order>
+                <process_order_today_time_limit>14,00,00</process_order_today_time_limit>
+            </order_processing>
+            <delivery_settings>
+                <delivery_work_days>1,2,3,4,5</delivery_work_days>
+                <days_needed_for_delivery>2</days_needed_for_delivery>
+                <enable_open_delivery_date>0</enable_open_delivery_date>
+                <open_delivery_range_days>2</open_delivery_range_days>
+                <use_excluded_processing_dates_as_excluded_delivery_dates>1</use_excluded_processing_dates_as_excluded_delivery_dates>
+            </delivery_settings>
+            <customer_selection>
+                <enabled>1</enabled>
+                <required>0</required>
+                <max_days_ahead>30</max_days_ahead>
+            </customer_selection>
+            <frontend>
+                <show_on_product>1</show_on_product>
+                <show_on_cart>1</show_on_cart>
+                <show_on_checkout>1</show_on_checkout>
+                <hide_when_out_of_stock>1</hide_when_out_of_stock>
+                <show_time_limit>1</show_time_limit>
+                <date_format>EEEE, MMMM d</date_format>
+            </frontend>
+        </smartdeliverydate>
+    </default>
+</config>

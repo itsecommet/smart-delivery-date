@@ -1,6 +1,22 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Ecommet\SmartDeliveryDate\Api\DeliveryDateServiceInterface" type="Ecommet\SmartDeliveryDate\Model\DeliveryDateService"/>
-    <preference for="Ecommet\SmartDeliveryDate\Api\CarrierInfoServiceInterface" type="Ecommet\SmartDeliveryDate\Model\CarrierInfoService"/>
-    <preference for="Ecommet\SmartDeliveryDate\Api\CompanyProcessInfoServiceInterface" type="Ecommet\SmartDeliveryDate\Model\CompanyProcessInfoService"/>
+    <type name="Magento\Checkout\Api\ShippingInformationManagementInterface">
+        <plugin name="ecommet_smartdeliverydate_save_date" type="Ecommet\SmartDeliveryDate\Plugin\Checkout\SaveDeliveryDate"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="ecommet_smartdeliverydate_order_extension" type="Ecommet\SmartDeliveryDate\Plugin\Sales\AddDeliveryDateToOrder"/>
+    </type>
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="ecommet_delivery_date" xsi:type="string">sales_order.ecommet_delivery_date</item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>

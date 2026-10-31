@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/**
+ * Multi-address review step: chosen delivery date per address
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var \Ecommet\SmartDeliveryDate\ViewModel\Multishipping $viewModel */
+$viewModel = $block->getData('view_model');
+$rows = $viewModel->getSelectedDates();
+if (!$rows) {
+    return;
+}
+?>
+<div class="ecommet-delivery-date-summary block">
+    <div class="block-title"><strong><?= $escaper->escapeHtml(__('Delivery Dates')) ?></strong></div>
+    <ul class="block-content">
+        <?php foreach ($rows as $row): ?>
+            <li>
+                <?= $escaper->escapeHtml($row['address']) ?>:
+                <strong><?= $escaper->escapeHtml($row['date']) ?></strong>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

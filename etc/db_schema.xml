@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote">
+        <column xsi:type="date" name="ecommet_delivery_date" nullable="true" comment="Customer Selected Delivery Date"/>
+    </table>
+    <table name="quote_address">
+        <column xsi:type="date" name="ecommet_delivery_date" nullable="true" comment="Customer Selected Delivery Date"/>
+    </table>
+    <table name="sales_order">
+        <column xsi:type="date" name="ecommet_delivery_date" nullable="true" comment="Customer Selected Delivery Date"/>
+    </table>
+    <table name="sales_order_grid">
+        <column xsi:type="date" name="ecommet_delivery_date" nullable="true" comment="Customer Selected Delivery Date"/>
+        <index referenceId="SALES_ORDER_GRID_ECOMMET_DELIVERY_DATE" indexType="btree">
+            <column name="ecommet_delivery_date"/>
+        </index>
+    </table>
+</schema>

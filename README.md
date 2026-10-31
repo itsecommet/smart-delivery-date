@@ -1,53 +1,66 @@
-# Ecommet_SmartDeliveryDate
+# Ecommet Smart Delivery Date for Magento 2
 
-**Ecommet Smart Delivery Date** is a Magento 2 module that enhances your store’s product pages by showing customers estimated delivery information with configurable working days, holidays, and processing times. It supports features like:
+Show shoppers when their order will arrive, and let them choose a delivery date at checkout
+that you can actually deliver on.
 
-✅ Configurable working days and excluded dates
-✅ Dynamic cutoff time with countdown
-✅ Estimated delivery range or single date
-✅ Fully integrated with Knockout.js for live updates
-✅ Customizable delivery messaging
+* **Estimated delivery** on the product page, in the cart and at checkout:
+  "Order within **2h 15m** and get it on **Friday, October 23**".
+* **Customer-selected delivery date** in one-page and **multi-address** checkout. Excluded
+  dates, carrier days off and too-early dates are blocked in the calendar **and re-checked on
+  the server when the order is placed**.
+* Processing days, carrier delivery days, same-day **cut-off time** and **excluded dates**
+  (one-off or every year), all in the **store timezone**.
+* Optional **delivery window** ("between Monday and Wednesday").
+* **Per-product processing time** attribute; in the cart the slowest product decides.
+* Chosen date on the **admin order view**, **order grid** (filterable), **customer account**,
+  **order e-mails** (`{{var ecommet_delivery_date}}`) and the **REST API**.
+* **Luma and Hyvä** (Alpine.js) templates in one module.
+* Translatable, with customisable messages and date format per store view.
 
----
+## Requirements
 
-## Features
+| | |
+| --- | --- |
+| Magento Open Source / Adobe Commerce | 2.4.6 – 2.4.9 |
+| PHP | 8.1 – 8.5 |
+| Themes | Luma (and Luma-based), Hyvä (tested with 1.5.3) with the Luma checkout fallback |
 
--   Show estimated delivery dates on product, cart, and checkout pages
--   Allow customers to see an _order within X time_ countdown
--   Manage holidays and non-processing days from the admin panel
--   Set a daily cutoff time for same-day processing
--   Display delivery date ranges with flexible rules
--   Admin configuration for working days, excluded dates, and processing times
+## Installation
 
----
+```bash
+composer require ecommet/module-smart-delivery-date
+bin/magento module:enable Ecommet_SmartDeliveryDate
+bin/magento setup:upgrade
+bin/magento cache:flush
+```
 
-## Configuration
+Then configure it in **Stores → Configuration → Ecommet Extensions → Smart Delivery Date**.
 
-1. Go to **Stores > Configuration > Ecommet Extensions > Smart Delivery Date**
-2. Enable the module
-3. Set your company working days
-4. Set days needed for order processing
-5. Set time limit for order processing
-6. Configure holidays or excluded dates
-7. Configure delivery settings
+The [User Guide](docs/USER_GUIDE.md) covers installation, every setting, how the date is
+calculated (with a worked example), multi-address checkout, Hyvä setup and troubleshooting.
 
----
+## For developers
 
-## Usage
+| | |
+| --- | --- |
+| Date engine | `Model\EstimateCalculator` (estimate and selectable dates), `Model\Calendar\WorkCalendar` |
+| Validation | `Model\DeliveryDateService::validate()`: used by the shipping-information plugin, the `sales_model_service_quote_submit_before` observer and the multishipping observers |
+| Storefront data | `GET smartdelivery/estimate/index?product_id=<id>` or `?cart=1` (not cacheable; product and cart pages stay full-page cached) |
+| Checkout | `window.checkoutConfig.ecommetDeliveryDate`; date sent as `addressInformation.extension_attributes.ecommet_delivery_date` |
+| Storage | `ecommet_delivery_date` (DATE) on `quote`, `quote_address`, `sales_order`, `sales_order_grid` |
+| API | `OrderInterface` extension attribute `ecommet_delivery_date` |
+| Hyvä | `hyva_*` layout handles switch to `templates/hyva/*`; `hyva_config_generate_before` registers the module for Tailwind |
 
-After configuring, the module will automatically display estimated delivery information on your product, cart, and checkout pages. The countdown timer and delivery date messaging are managed dynamically via Knockout.js components.
+Run the unit tests from the Magento root:
 
----
+```bash
+vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist app/code/Ecommet/SmartDeliveryDate/Test/Unit
+```
 
 ## Support
 
-For any issues, feature requests, or professional support, please reach out to:
-
-📧 [ecommet.solutions@gmail.com](mailto:ecommet.solutions@gmail.com)
-🌐 [ecommet.in](https://ecommet.in)
-
----
+📧 [ecommet.solutions@gmail.com](mailto:ecommet.solutions@gmail.com) · 🌐 [ecommet.in](https://ecommet.in)
 
 ## License
 
-This module is licensed under the [Ecommet Commercial License](https://ecommet.in/license).
+Proprietary. See [LICENSE.txt](LICENSE.txt).

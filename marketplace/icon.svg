@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f8a5b"/>
+      <stop offset="1" stop-color="#0f5c4a"/>
+    </linearGradient>
+    <linearGradient id="truck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffc947"/>
+      <stop offset="1" stop-color="#f5a623"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- calendar -->
+  <rect x="108" y="112" width="268" height="248" rx="34" fill="#ffffff"/>
+  <path d="M108 146a34 34 0 0 1 34-34h200a34 34 0 0 1 34 34v42H108z" fill="#d6efe3"/>
+  <rect x="160" y="84" width="26" height="62" rx="13" fill="#ffffff" stroke="#0f5c4a" stroke-width="10"/>
+  <rect x="298" y="84" width="26" height="62" rx="13" fill="#ffffff" stroke="#0f5c4a" stroke-width="10"/>
+  <g fill="#c9d6d0">
+    <rect x="142" y="214" width="40" height="34" rx="8"/>
+    <rect x="198" y="214" width="40" height="34" rx="8"/>
+    <rect x="254" y="214" width="40" height="34" rx="8"/>
+    <rect x="310" y="214" width="40" height="34" rx="8"/>
+    <rect x="142" y="266" width="40" height="34" rx="8"/>
+    <rect x="310" y="266" width="40" height="34" rx="8"/>
+  </g>
+  <!-- the chosen day -->
+  <rect x="190" y="258" width="112" height="50" rx="12" fill="#1f8a5b"/>
+  <path d="M222 283l17 16 32-33" fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- truck -->
+  <g transform="translate(222 318)">
+    <rect x="0" y="0" width="150" height="92" rx="16" fill="url(#truck)"/>
+    <path d="M150 26h52l34 40v26h-86z" fill="url(#truck)"/>
+    <path d="M162 38h36l22 26h-58z" fill="#0f5c4a" opacity=".85"/>
+    <circle cx="48" cy="96" r="24" fill="#0b3d32"/>
+    <circle cx="48" cy="96" r="10" fill="#ffffff"/>
+    <circle cx="196" cy="96" r="24" fill="#0b3d32"/>
+    <circle cx="196" cy="96" r="10" fill="#ffffff"/>
+    <g stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity=".9">
+      <path d="M-60 56h44"/><path d="M-84 78h64"/><path d="M-50 100h30"/>
+    </g>
+  </g>
+</svg>

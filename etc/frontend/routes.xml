@@ -1,7 +1,13 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
-        <route frontName="smartdelivery" id="smartdelivery">
+        <route id="smartdelivery" frontName="smartdelivery">
             <module name="Ecommet_SmartDeliveryDate"/>
         </route>
     </router>

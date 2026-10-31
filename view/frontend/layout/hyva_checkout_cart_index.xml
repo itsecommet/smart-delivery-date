@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ *
+ * Hyvä themes load hyva_* handles on top of the regular ones; Luma ignores them.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="ecommet.delivery.estimate.cart" template="Ecommet_SmartDeliveryDate::hyva/estimate.phtml"/>
+    </body>
+</page>

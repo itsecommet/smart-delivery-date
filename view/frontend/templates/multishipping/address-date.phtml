@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/**
+ * Multi-address shipping step: estimate and delivery date for one address (Luma).
+ * Server-rendered, so it works without JavaScript; the server validates the choice.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var \Ecommet\SmartDeliveryDate\ViewModel\Multishipping $viewModel */
+$viewModel = $block->getData('view_model');
+$address = $block->getData('address');
+$field = $address ? $viewModel->getAddressField($address) : null;
+if ($field === null) {
+    return;
+}
+?>
+<div class="ecommet-delivery-date">
+    <?php if ($field['estimate']): ?>
+        <div class="ecommet-delivery-estimate">
+            <span class="ecommet-delivery-estimate__icon" aria-hidden="true"></span>
+            <span class="ecommet-delivery-estimate__text">
+                <?php if ($field['latest']): ?>
+                    <?= $escaper->escapeHtml(
+                        __(
+                            'Estimated delivery between <strong>%1</strong> and <strong>%2</strong>',
+                            $field['estimate'],
+                            $field['latest']
+                        ),
+                        ['strong']
+                    ) ?>
+                <?php else: ?>
+                    <?= $escaper->escapeHtml(
+                        __('Estimated delivery on <strong>%1</strong>', $field['estimate']),
+                        ['strong']
+                    ) ?>
+                <?php endif; ?>
+            </span>
+        </div>
+    <?php endif; ?>
+    <?php if ($field['options']): ?>
+        <div class="field ecommet-delivery-date__field<?= $field['required'] ? ' required' : '' ?>">
+            <label class="label" for="<?= $escaper->escapeHtmlAttr($field['id']) ?>">
+                <span><?= $escaper->escapeHtml($field['label']) ?></span>
+            </label>
+            <div class="control">
+                <select id="<?= $escaper->escapeHtmlAttr($field['id']) ?>"
+                    name="<?= $escaper->escapeHtmlAttr($field['name']) ?>"
+                    class="select" <?= $field['required'] ? ' required aria-required="true"' : '' ?>>
+                    <?php $placeholder = $field['required'] ? __('Please choose a date') : __('As soon as possible'); ?>
+                    <option value=""><?= $escaper->escapeHtml($placeholder) ?></option>
+                    <?php foreach ($field['options'] as $option): ?>
+                        <option value="<?= $escaper->escapeHtmlAttr($option['value']) ?>"
+                            <?= $option['value'] === $field['selected'] ? 'selected' : '' ?>>
+                            <?= $escaper->escapeHtml($option['label']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <?php if ($field['note']): ?>
+                    <div class="ecommet-delivery-date__note"><?= $escaper->escapeHtml($field['note']) ?></div>
+                <?php endif; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

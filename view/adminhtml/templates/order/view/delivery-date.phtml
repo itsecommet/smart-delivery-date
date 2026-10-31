@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/**
+ * Admin order view: chosen delivery date
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var \Ecommet\SmartDeliveryDate\ViewModel\OrderDeliveryDate $viewModel */
+$viewModel = $block->getData('view_model');
+$date = $viewModel->getFormattedDate();
+if ($date === '') {
+    return;
+}
+?>
+<section class="admin__page-section ecommet-delivery-date">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $escaper->escapeHtml(__('Delivery Date')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <?= $escaper->escapeHtml(__('Customer selected delivery date:')) ?>
+        <strong><?= $escaper->escapeHtml($date) ?></strong>
+    </div>
+</section>

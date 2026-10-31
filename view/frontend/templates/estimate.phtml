@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/**
+ * Luma: estimated delivery message (product page, cart, multi-address checkout)
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var \Ecommet\SmartDeliveryDate\ViewModel\Estimate $viewModel */
+$viewModel = $block->getData('view_model');
+$page = (string)$block->getData('page');
+if (!$viewModel->isVisible($page)) {
+    return;
+}
+$mageInit = '{"Ecommet_SmartDeliveryDate/js/estimate": ' . $viewModel->getConfigJson($page) . '}';
+?>
+<div class="ecommet-delivery-estimate" hidden
+    data-mage-init="<?= $escaper->escapeHtmlAttr($mageInit) ?>">
+    <span class="ecommet-delivery-estimate__icon" aria-hidden="true"></span>
+    <span class="ecommet-delivery-estimate__text" data-role="ecommet-estimate-text"></span>
+</div>

@@ -1,0 +1,168 @@
+<?php
+
+/**
+ * Copyright © Ecommet Solutions. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/**
+ * Hyvä: estimated delivery message (product page, cart). Alpine.js, compatible with Hyvä's strict CSP mode.
+ * The message logic mirrors view/frontend/web/js/model/message.js (Luma).
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Hyva\Theme\ViewModel\HyvaCsp|null $hyvaCsp
+ */
+
+/** @var \Ecommet\SmartDeliveryDate\ViewModel\Estimate $viewModel */
+$viewModel = $block->getData('view_model');
+$page = (string)$block->getData('page');
+if (!$viewModel->isVisible($page)) {
+    return;
+}
+?>
+<div x-data="ecommetDeliveryEstimate"
+    x-show="visible"
+    x-cloak
+    data-config="<?= $escaper->escapeHtmlAttr($viewModel->getConfigJson($page)) ?>"
+    class="ecommet-delivery-estimate flex items-start gap-2 my-4 px-4 py-3 border border-green-200 rounded bg-green-50
+            text-sm text-gray-800">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"
+        class="shrink-0 mt-px text-green-700" aria-hidden="true">
+        <path d="M3 5h11v9h2.5V8H19l3 4v4h-1.5a2.5 2.5 0 0 1-5 0h-5a2.5 2.5 0 0 1-5 0H3V5zm15 4.5V12h2.4L18.8
+                 9.5H18zM8 15.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm10 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+    </svg>
+    <span>
+        <template x-for="(segment, index) in segments" :key="index">
+            <span x-bind:class="segment.cls" x-text="segment.text"></span>
+        </template>
+    </span>
+</div>
+<script>
+    function ecommetDeliveryEstimate() {
+        'use strict';
+
+        const formatCountdown = (seconds, units) => {
+            const days = Math.floor(seconds / 86400),
+                hours = Math.floor(seconds % 86400 / 3600),
+                minutes = Math.floor(seconds % 3600 / 60),
+                parts = [];
+
+            if (days) {
+                parts.push(units.d.replace('{n}', days));
+            }
+            if (days || hours) {
+                parts.push(units.h.replace('{n}', hours));
+            }
+            parts.push(units.m.replace('{n}', minutes));
+            if (!days) {
+                parts.push(units.s.replace('{n}', seconds % 60));
+            }
+
+            return parts.join(' ');
+        };
+        const fill = (template, values) => {
+            let result = [];
+            String(template).split(/(\{[a-z]+\})/).forEach((piece) => {
+                const key = piece.slice(1, -1);
+                if (piece.charAt(0) === '{' && Object.prototype.hasOwnProperty.call(values, key)) {
+                    result = result.concat(values[key]);
+                } else if (piece !== '') {
+                    result.push({
+                        text: piece,
+                        cls: ''
+                    });
+                }
+            });
+            return result;
+        };
+        const strong = (text) => [{
+            text: text,
+            cls: 'font-semibold'
+        }];
+
+        return {
+            visible: false,
+            segments: [],
+            config: null,
+            estimate: null,
+            deadline: 0,
+            ticker: null,
+            refresher: null,
+
+            init() {
+                this.config = JSON.parse(this.$root.dataset.config);
+                this.load();
+            },
+
+            load() {
+                clearInterval(this.ticker);
+                clearTimeout(this.refresher);
+                fetch(this.config.url, {
+                        credentials: 'same-origin',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then((response) => response.ok ? response.json() : {
+                        success: false
+                    })
+                    .then((data) => {
+                        if (!data.success) {
+                            this.visible = false;
+                            return;
+                        }
+                        this.estimate = data.estimate;
+                        // Count down from the server's figure, so a wrong device clock does not matter.
+                        this.deadline = Date.now() + Math.max(1, this.estimate.secondsToCutoff) * 1000;
+                        this.render();
+                        this.visible = true;
+                        if (this.config.phrases.showCountdown) {
+                            this.ticker = setInterval(() => this.render(), 1000);
+                        }
+                        this.refresher = setTimeout(
+                            () => this.load(),
+                            Math.min(this.deadline - Date.now() + 1000, 2147483000)
+                        );
+                    })
+                    .catch(() => {
+                        this.visible = false;
+                    });
+            },
+
+            render() {
+                const phrases = this.config.phrases,
+                    estimate = this.estimate,
+                    seconds = Math.max(0, Math.round((this.deadline - Date.now()) / 1000)),
+                    delivery = estimate.latestLabel ?
+                    fill(phrases.range, {
+                        from: strong(estimate.earliestLabel),
+                        to: strong(estimate.latestLabel)
+                    }) :
+                    fill(phrases.single, {
+                        date: strong(estimate.earliestLabel)
+                    });
+
+                this.segments = phrases.showCountdown && seconds > 0 ?
+                    fill(phrases.messageCountdown, {
+                        countdown: strong(formatCountdown(seconds, phrases.units)),
+                        delivery: delivery
+                    }) :
+                    fill(phrases.message, {
+                        delivery: delivery
+                    });
+            }
+        };
+    }
+
+    window.addEventListener(
+        'alpine:init',
+        () => Alpine.data('ecommetDeliveryEstimate', ecommetDeliveryEstimate), {
+            once: true
+        }
+    );
+</script>
+<?php if (isset($hyvaCsp)): ?>
+    <?php $hyvaCsp->registerInlineScript() ?>
+<?php endif; ?>
